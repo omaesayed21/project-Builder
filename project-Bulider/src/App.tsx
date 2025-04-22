@@ -4,7 +4,11 @@ import ProductCard from './Componentes/ProductCard'
  const  App = () => {
    return (
      <div> 
-    <h1> <ProductCard /></h1>
+    <ProductCard />
+    <ProductCard />
+    <ProductCard />
+    <ProductCard />
+    <ProductCard />
      </div>
    )
  }
