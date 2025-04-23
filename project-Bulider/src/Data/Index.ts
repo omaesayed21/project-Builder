@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { IProduct } from "../Interface/Index";
+import { IFormInput, IProduct } from "../Interface/Index";
 
 export const productList: IProduct[] = [
   {
@@ -229,5 +229,34 @@ export const categories: ICategory[] = [
     name: "Camera",
     imageURL:
       "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  },
+];
+
+
+export const products: IFormInput[] = [
+
+  {
+    id: "title",
+    name: "title",
+    label: "Product Title",
+    type: "text",
+  },
+  {
+    id: "description",
+    name: "description",
+    label: "Product Description",
+    type: "text",
+  },
+  {
+    id: "image",
+    name: "imageURL",
+    label: "Product Image URL",
+    type: "text",
+  },
+  {
+    id: "price",
+    name: "price",
+    label: "Product Price",
+    type: "text",
   },
 ];

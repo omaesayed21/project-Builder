@@ -1,8 +1,9 @@
  import { useState } from 'react'
 import ProductCard from './Componentes/ui/ProductCard'
-import { productList } from './Data/Index'
+import { formInputsList, productList } from './Data/Index'
 import Modal from './Componentes/ui/Modal'
 import  Button  from './Componentes/ui/Button'
+import Input from './Componentes/ui/Input'
  
 /**
  * The main application component.
@@ -20,6 +21,10 @@ import  Button  from './Componentes/ui/Button'
     setIsOpen(true)
   } 
   const renderProductsList = productList.map(product => <ProductCard key={product.id}  product={product}/>)
+  const renderFormInputsList = formInputsList.map(input =><div className=' flex flex-col '>
+ <label className=' mb-[1px] text-sm  font-medium text-gray-700' htmlFor={input.id}>{input.label}</label>
+ <Input type='text' id={input.id} name={input.name}  ></Input>
+  </div> )
    return ( 
     
     <div className=' container mx-auto'>
@@ -27,12 +32,14 @@ import  Button  from './Componentes/ui/Button'
         <div className=' grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4  lg:grid-cols-3 gap-4 p-2 rounded-md '> 
     {renderProductsList}
      </div>
-    <Modal isOpen={isOpen} closeModal={closeModal} > 
-    
-<div className='flex items-center  space-x-2  gap-2'>
+    <Modal isOpen={isOpen} closeModal={closeModal} title='Add A New Product' > 
+    <div className=' space-y-3'>
+    {renderFormInputsList}
+<div className='flex items-center  space-x-3  gap-2'>
 <Button   Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1 " />
-    <Button Childern={"Edit"} className=" bg-red-700 hover:bg-red-800 w-full  " />
+    <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  " />
 </div>
+    </div>
     
     </Modal>
     </div>

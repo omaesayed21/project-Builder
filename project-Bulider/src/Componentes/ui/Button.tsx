@@ -14,7 +14,7 @@ interface Iprops {
      */
 const Button = ({Childern , className , width = "w-full" ,...rest }: Iprops) => {
     return (
-        <button className={`${className} rounded-md p-2 w-full text-white ` } {...rest}>{Childern}</button>
+        <button className={`${className} rounded-lg p-2 w-full text-white ` } {...rest}>{Childern}</button>
     )
 }
 
