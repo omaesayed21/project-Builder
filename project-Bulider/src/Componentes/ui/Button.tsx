@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes , ReactNode } from "react";
 
-interface Iprops {
+interface Iprops extends ButtonHTMLAttributes<HTMLButtonElement>{
         Childern : ReactNode
         className?: string;
         width?: "w-full" |"w-fit"
