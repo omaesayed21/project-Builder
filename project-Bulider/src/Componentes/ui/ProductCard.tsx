@@ -35,8 +35,8 @@ const ProductCard = ( { product}: Iprops) => {
         </div>
       
         <div className='flex items-center justify-between space-x-2 mt-4'>
-          <Button Childern={"Edit"} className="bg-red-700 w-full" />
-          <Button Childern={"Delete"} className="bg-blue-700 w-full" />
+          <Button Childern={"Edit"} className="bg-red-700 w-full  " />
+          <Button Childern={"Delete"} className="bg-blue-700 w-full  " />
         </div>
       </div>
       
