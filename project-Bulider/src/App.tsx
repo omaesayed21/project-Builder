@@ -1,6 +1,6 @@
  import { ChangeEvent, useState } from 'react'
 import ProductCard from './Componentes/ui/ProductCard'
-import { formInputsList, productList , colors } from './Data/Index'
+import { formInputsList, productList , colors, categories } from './Data/Index'
 import Modal from './Componentes/ui/Modal'
 import  Button  from './Componentes/ui/Button'
 import Input from './Componentes/ui/Input'
@@ -44,7 +44,9 @@ const defaultProductObject  = {
       price: "",
     })
 
-  
+      const [selectedCatogeris, setSelectedCatogeris] = useState(categories[0]) 
+      
+      
   const onChangeHandler = (e : ChangeEvent<HTMLInputElement>) => {
     const {name , value} = e.target
     setProduct({...product , [name] : value})
@@ -70,18 +72,19 @@ const defaultProductObject  = {
       title: product.title
       , description: product.description,
       imageURL: product.imageURL,
-      price: product.price
-    })
+      price: product.price,
+           })
      console.log(errors);
       
-     const hasErrMsg = Object.values(errors).some(values => values === "")&& Object.values(errors).every(values => values === "")
+     const hasErrMsg =       Object.values(errors).some(value => value === "") && Object.values(errors).every(value => value === "");
+
 
      if(!hasErrMsg){
         setErrors(errors)
       return
      }
      console.log(" send data to the server");
-     setProducts(prev => [ {...product  , id : uuid() , colors: tempColor } , ...prev  ])
+     setProducts(prev => [ {...product  , id : uuid() , colors: tempColor , category : selectedCatogeris } , ...prev  ])
      setProduct(defaultProductObject);
      setTempColor([])
      closeModal()
@@ -126,7 +129,7 @@ const defaultProductObject  = {
     <Modal isOpen={isOpen} closeModal={closeModal} title='Add A New Product' > 
     <form className=' space-y-3'  onSubmit={onSubmitHandler} >
     {renderFormInputsList}
-    <Select></Select>
+    <Select  selected={selectedCatogeris} setSelected={setSelectedCatogeris}  ></Select>
 
 {/* color list  */}
     <div className='flex my-2 space-x-1 items-center'>
@@ -150,3 +153,4 @@ const defaultProductObject  = {
    }
 
 export default App 
+ 

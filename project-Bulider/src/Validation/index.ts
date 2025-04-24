@@ -1,18 +1,23 @@
  
 export const productValidation = (product: {  title: string,
     description: string,
-    imageURL: string,  price: string }) => {
+    imageURL: string, 
+     price: string ,
+}) => {
 
     const error:  {   title: string,
         description: string,
         imageURL: string, 
-        price: string} = {
+        price: string
+
+    
+    } = {
 
             title: "",
             description: "",
             imageURL: "",
             price: "",
-        }
+              }
         const validateUrl = /^(https?|ftp):\/\/[^\s]+$/.test(product.imageURL)
 
             if (!product.title.trim() || product.title.length<10 || product.title.length >80 )  {
@@ -30,6 +35,12 @@ export const productValidation = (product: {  title: string,
 
                 error.price = "Price must be a Number"
               }
+              // if(!product.colors || product.colors.length ===0){
+              //   error.colors = "Please select at least one color"
+              //   console.log(error.colors);
+                
+              // }
+
               
               
                 return error

@@ -32,7 +32,7 @@ const ProductCard = ( { product}: Iprops) => {
         <div className='flex items-center justify-between mt-auto'>
           <span className='text-indigo-600 text-xl font-bold'>${product.price}</span>
           <Image 
-            imageUrl={product.imageURL} 
+            imageUrl={product.category.imageURL} 
             alt="Productcard" 
             className="w-10 h-10 rounded-full object-contain" 
           />
