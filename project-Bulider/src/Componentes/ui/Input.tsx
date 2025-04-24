@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react"
+// import { InputHTMLAttributes } from "react"
 
 interface Iprops extends React.InputHTMLAttributes<HTMLInputElement> {
 

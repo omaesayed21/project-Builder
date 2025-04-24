@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { IFormInput, IProduct } from "../Interface/Index";
+import { ICategory, IFormInput, IProduct } from "../Interface/Index";
 
 export const productList: IProduct[] = [
   {

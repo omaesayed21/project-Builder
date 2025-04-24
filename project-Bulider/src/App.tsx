@@ -9,6 +9,7 @@ import { productValidation } from './Validation'
 import ErrorMassage from './Componentes/ui/ErorrMassage'
 import CircleColor from './Componentes/ui/CircleColor'
 import { v4 as uuid } from "uuid";
+import Select from './Componentes/ui/Select'
 
 // /**
 //  * The main application component.
@@ -94,6 +95,8 @@ const defaultProductObject  = {
     
   
   const renderProductsList = products.map(product => <ProductCard key={product.id}  product={product}/>)
+    
+    
     const renderColorList = colors.map(colors => <CircleColor key={colors} color={colors} onClick={
       ()=>{
       if (tempColor.includes(colors)){ 
@@ -104,6 +107,7 @@ const defaultProductObject  = {
     
     
     } }/>)
+
 
 
     // From List
@@ -122,11 +126,13 @@ const defaultProductObject  = {
     <Modal isOpen={isOpen} closeModal={closeModal} title='Add A New Product' > 
     <form className=' space-y-3'  onSubmit={onSubmitHandler} >
     {renderFormInputsList}
+    <Select></Select>
 
 {/* color list  */}
     <div className='flex my-2 space-x-1 items-center'>
       {tempColor.map(color => <span className='p-1 mr-1 text-sm   rounded-md text-white' style={{backgroundColor: color}}>{color}</span>)}
     </div>
+
     <div className='flex my-2 space-x-1 items-center '>
     {renderColorList}
     </div>

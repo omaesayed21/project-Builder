@@ -1,4 +1,3 @@
- import { IProduct } from "../Interface/Index"
  
 export const productValidation = (product: {  title: string,
     description: string,
