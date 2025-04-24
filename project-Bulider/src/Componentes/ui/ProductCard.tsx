@@ -7,14 +7,17 @@ interface Iprops{
     product: IProduct
     setProductToEdit : (product  : IProduct) => void
     openEditModal : () => void
+    idx :number
+    setProductEditidx : (value : number) => void
 }
 
-const ProductCard = ( { product  , setProductToEdit , openEditModal}: Iprops) => {
+const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setProductEditidx}: Iprops) => {
   const renderColorList = product.colors && product.colors.map(colors => <CircleColor key={colors} color={colors}
   />)
   const onEdit =() =>{
     setProductToEdit(product)
     openEditModal()
+    setProductEditidx(idx)
   }
     return (
         <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-2'>

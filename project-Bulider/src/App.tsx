@@ -39,6 +39,7 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   const [tempColor, setTempColor] = useState<string[]>([])
+  const [ productEditidx , setProductEditIdx ] = useState<number>(0)
 
 
   console.log(productEdit);
@@ -148,8 +149,14 @@ const App = () => {
 
 // Randers
 
-  const renderProductsList = products.map(product => <ProductCard key={product.id} product={product} setProductToEdit={setProductEdit} openEditModal={openEditModal} />)
+  const renderProductsList 
+  = products.map(product , idx =>
+<>
+<h2>{idx}</h2>
+     <ProductCard key={product.id} product={product} setProductToEdit={setProductEdit} openEditModal={openEditModal}   setProductEditidx={setProductEditIdx} idx={idx}/>
 
+
+</>)
 
   const renderColorList = colors.map(colors => <CircleColor key={colors} color={colors} onClick={
     () => {
