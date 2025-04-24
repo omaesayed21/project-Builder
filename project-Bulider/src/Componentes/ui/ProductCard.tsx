@@ -2,12 +2,15 @@ import { IProduct } from '../../Interface/Index'
 import Button from './Button'
 import Image from './Image'
 import { textSlice } from '../Utils/function'
+import CircleColor from './CircleColor'
 interface Iprops{
 
     product: IProduct
 }
 
 const ProductCard = ( { product}: Iprops) => {
+  const renderColorList = product.colors && product.colors.map(colors => <CircleColor key={colors} color={colors}
+  />)
     return (
         <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-2'>
         <Image 
@@ -20,9 +23,10 @@ const ProductCard = ( { product}: Iprops) => {
         <p className="text-gray-600 flex-grow">{textSlice(product.description, 50)}</p>
       
         <div className='flex my-2 space-x-2 items-center'>
-          <span className='w-5 h-5 bg-indigo-600 rounded-full cursor-pointer'></span>
+          {renderColorList}
+          {/* <span className='w-5 h-5 bg-indigo-600 rounded-full cursor-pointer'></span>
           <span className='w-5 h-5 bg-red-600 rounded-full cursor-pointer'></span>
-          <span className='w-5 h-5 bg-yellow-600 rounded-full cursor-pointer'></span>
+          <span className='w-5 h-5 bg-yellow-600 rounded-full cursor-pointer'></span> */}
         </div>
       
         <div className='flex items-center justify-between mt-auto'>
