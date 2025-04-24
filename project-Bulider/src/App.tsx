@@ -1,12 +1,13 @@
  import { ChangeEvent, useState } from 'react'
 import ProductCard from './Componentes/ui/ProductCard'
-import { formInputsList, productList } from './Data/Index'
+import { formInputsList, productList , colors } from './Data/Index'
 import Modal from './Componentes/ui/Modal'
 import  Button  from './Componentes/ui/Button'
 import Input from './Componentes/ui/Input'
 import { IProduct } from './Interface/Index'
 import { productValidation } from './Validation'
 import ErrorMassage from './Componentes/ui/ErorrMassage'
+import CircleColor from './Componentes/ui/CircleColor'
  
 // /**
 //  * The main application component.
@@ -83,11 +84,13 @@ const defaultProductObject  = {
     
   
   const renderProductsList = productList.map(product => <ProductCard key={product.id}  product={product}/>)
+    const renderColorList = colors.map(colors => <CircleColor key={colors} color={colors} />)
+
+
   const renderFormInputsList = formInputsList.map(input =><div className=' flex flex-col  ' key={input.id}>
  <label className=' mb-[1px] text-sm  font-medium text-gray-700' htmlFor={input.id}>{input.label}</label>
  <Input type='text' id={input.id} name={input.name} value={product[input.name]} onChange={onChangeHandler} ></Input>
  {errors[input.name] && <ErrorMassage message={errors[input.name]} />}
- 
    </div> )
    return ( 
     
@@ -99,7 +102,10 @@ const defaultProductObject  = {
     <Modal isOpen={isOpen} closeModal={closeModal} title='Add A New Product' > 
     <form className=' space-y-3'  onSubmit={onSubmitHandler} >
     {renderFormInputsList}
+    <div className='flex my-2 space-x-1 items-center'>
 
+    {renderColorList}
+    </div>
 <div className='flex items-center  space-x-3  gap-2'>
 <Button   Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer" / >
     <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  cursor-pointer "  onClick={onCancelHandler}/>
