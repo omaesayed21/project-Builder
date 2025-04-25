@@ -145,16 +145,13 @@ const App = () => {
 
 
     const updatedProducts= [...products]
-    updatedProducts[productEditidx] = productEdit
+    updatedProducts[productEditidx] = {...productEdit , colors : tempColor.concat(productEdit.colors) }
     setProducts(updatedProducts)
 
     // setProducts(prev => [{ ...product, id: uuid(), colors: tempColor, category: selectedCatogeris }, ...prev])
     setProductEdit(defaultProductObject);
     setTempColor([])
     closeEditModal()
-
-
-
 
   }
 
@@ -175,7 +172,17 @@ const renderProductsList = products.map((product, idx) => (
 
   const renderColorList = colors.map(colors => <CircleColor key={colors} color={colors} onClick={
     () => {
+            // DUPLICATE  TO Cancel  in add Modal
+
       if (tempColor.includes(colors)) {
+        setTempColor(prev => prev.filter(item => item !== colors))
+        return
+      }
+      setTempColor([...tempColor, colors])
+
+
+      // DUPLICATE  TO Cancel  in Edit Modal
+      if (productEdit.colors.includes(colors)) {
         setTempColor(prev => prev.filter(item => item !== colors))
         return
       }
@@ -252,10 +259,11 @@ const renderProductsList = products.map((product, idx) => (
             setSelected={value => setProductEdit({ ...productEdit, category: value })}
           />
           
-          
+                    {/* color list  */}
+
           
           <div className='flex my-2 space-x-1 items-center'>
-            { productEdit.colors.map(color => <span className='p-1 mr-1 text-sm   rounded-md text-white' style={{ backgroundColor: color }}>{color}</span>)}
+            { tempColor.concat(productEdit.colors).map(color => <span className='p-1 mr-1 text-sm   rounded-md text-white' style={{ backgroundColor: color }}>{color}</span>)}
           </div>
 
           <div className='flex my-2 space-x-1 items-center '>
