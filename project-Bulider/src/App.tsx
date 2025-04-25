@@ -41,6 +41,8 @@ const App = () => {
   const [tempColor, setTempColor] = useState<string[]>([])
   const [ productEditidx , setProductEditIdx ] = useState<number>(0)
 
+  console.log(productEditidx);
+  
 
   console.log(productEdit);
 
@@ -63,12 +65,19 @@ const App = () => {
 
     setErrors({ ...errors, [name]: "" })
   }
-  const onChangeEditHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setProductEdit({ ...productEdit, [name]: value })
+ 
+  const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
 
-    setErrors({ ...errors, [name]: "" })
-  }
+    setProductEdit({
+      ...productEdit,
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
 
   // ADD MODAL FUNCTIONS
   function closeModal() {
@@ -99,7 +108,7 @@ const App = () => {
       imageURL: product.imageURL,
       price: product.price,
     })
-    console.log(errors);
+    // console.log(errors);
 
     const hasErrMsg = Object.values(errors).some(value => value === "") && Object.values(errors).every(value => value === "");
 
@@ -108,25 +117,23 @@ const App = () => {
       setErrors(errors)
       return
     }
-    console.log(" send data to the server");
+    console.log(" send  to the server");
     setProducts(prev => [{ ...product, id: uuid(), colors: tempColor, category: selectedCatogeris }, ...prev])
     setProduct(defaultProductObject);
     setTempColor([])
     closeModal()
 
 
-
-
   }
   const onSubmitEditHandler = (e: ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
     const errors = productValidation({
-      title: product.title
-      , description: product.description,
-      imageURL: product.imageURL,
-      price: product.price,
+      title: productEdit.title
+     , description: productEdit.description,
+      imageURL: productEdit.imageURL,
+      price: productEdit.price,
     })
-    console.log(errors);
+    // console.log(errors);
 
     const hasErrMsg = Object.values(errors).some(value => value === "") && Object.values(errors).every(value => value === "");
 
@@ -135,11 +142,16 @@ const App = () => {
       setErrors(errors)
       return
     }
-    console.log(" send data to the server");
-    setProducts(prev => [{ ...product, id: uuid(), colors: tempColor, category: selectedCatogeris }, ...prev])
+
+
+    const updatedProducts= [...products]
+    updatedProducts[productEditidx] = productEdit
+    setProducts(updatedProducts)
+
+    // setProducts(prev => [{ ...product, id: uuid(), colors: tempColor, category: selectedCatogeris }, ...prev])
     setProductEdit(defaultProductObject);
     setTempColor([])
-    closeModal()
+    closeEditModal()
 
 
 
@@ -149,14 +161,17 @@ const App = () => {
 
 // Randers
 
-  const renderProductsList 
-  = products.map(product , idx =>
-<>
-<h2>{idx}</h2>
-     <ProductCard key={product.id} product={product} setProductToEdit={setProductEdit} openEditModal={openEditModal}   setProductEditidx={setProductEditIdx} idx={idx}/>
+const renderProductsList = products.map((product, idx) => (
+    <ProductCard
+      key={product.id}
+      product={product}
+      setProductToEdit={setProductEdit}
+      openEditModal={openEditModal}
+      setProductEditidx={setProductEditIdx}
+      idx={idx}
+    />
+));
 
-
-</>)
 
   const renderColorList = colors.map(colors => <CircleColor key={colors} color={colors} onClick={
     () => {
@@ -212,7 +227,8 @@ const App = () => {
             {renderColorList}
           </div>
 
-          {/* BUTTONS Modal */}
+          {/* BUTTONS Modal for ADD product */}
+
           <div className='flex items-center  space-x-3  gap-2 mt-2'>
             <Button Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer" />
             <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  cursor-pointer " onClick={onCancelHandler} />
@@ -221,7 +237,9 @@ const App = () => {
 
       </Modal>
 
+
       {/* Edit Product Modal */}
+
       <Modal isOpen={isOpenEditModal} closeModal={closeEditModal} title='Edit This Product' >
         <form className=' space-y-3' onSubmit={onSubmitEditHandler} >
           {renderProductEditList("Title", "Product Title", "title")}
@@ -229,22 +247,23 @@ const App = () => {
           {renderProductEditList("Imaage URL", "Product Image URL", "imageURL")}
           {renderProductEditList("price", "Product Price", "price")}
 
-     
+          <Select
+            selected={productEdit.category}
+            setSelected={value => setProductEdit({ ...productEdit, category: value })}
+          />
+          
+          
+          
+          <div className='flex my-2 space-x-1 items-center'>
+            { productEdit.colors.map(color => <span className='p-1 mr-1 text-sm   rounded-md text-white' style={{ backgroundColor: color }}>{color}</span>)}
+          </div>
 
-          {/* {renderFormInputsList}
-    <Select  selected={selectedCatogeris} setSelected={setSelectedCatogeris}  ></Select>
+          <div className='flex my-2 space-x-1 items-center '>
+            {renderColorList}
+          </div>
 
-    
-{/* color list  */}
-          {/* <div className='flex my-2 space-x-1 items-center'>
-      {tempColor.map(color => <span className='p-1 mr-1 text-sm   rounded-md text-white' style={{backgroundColor: color}}>{color}</span>)}
-    </div>
 
-    <div className='flex my-2 space-x-1 items-center '>
-    {renderColorList}
-    </div> */}
-
-          {/* BUTTONS Modal */}
+{/* Buttos Modal for Edit */}
           <div className='flex items-center  space-x-3  gap-2 mt-2'>
             <Button Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer" />
             <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  cursor-pointer " onClick={onCancelHandler} />
