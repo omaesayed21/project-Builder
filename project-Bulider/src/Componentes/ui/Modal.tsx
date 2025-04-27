@@ -5,10 +5,12 @@ interface Iprops {
   isOpen: boolean
   closeModal: () => void
   title?: string
-  children: ReactNode
+  children: ReactNode 
+  description?: string;
+
 }
 
-const Modal = ({ isOpen, closeModal, title, children }: Iprops) => {
+const Modal = ({ isOpen, closeModal, title, children , description }: Iprops) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -42,7 +44,7 @@ const Modal = ({ isOpen, closeModal, title, children }: Iprops) => {
                     {title}
                   </Dialog.Title>
                 )}
-
+                      {description && <p className="text-sm text-gray-500 mt-3">{description}</p>}
                 <div className="mt-4">
                   {children}
                 </div>

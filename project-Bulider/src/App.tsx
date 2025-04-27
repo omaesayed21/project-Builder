@@ -11,6 +11,7 @@ import CircleColor from './Componentes/ui/CircleColor'
 import { v4 as uuid } from "uuid";
 import Select from './Componentes/ui/Select'
 import ProductName from './Type/Index'
+import toast , { Toaster} from 'react-hot-toast'
 
 // /**
 //  * The main application component.
@@ -40,6 +41,8 @@ const App = () => {
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   const [tempColor, setTempColor] = useState<string[]>([])
   const [ productEditidx , setProductEditIdx ] = useState<number>(0)
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
+
 
   console.log(productEditidx);
   
@@ -95,6 +98,9 @@ const App = () => {
   function openEditModal() {
     setIsOpenEditModal(true)
   }
+  const closeConfirmModal = () => setIsOpenConfirmModal(false);
+  const openConfirmModal = () => setIsOpenConfirmModal(true);
+
 
   const onCancelHandler = () => {
     setProduct(defaultProductObject)
@@ -124,7 +130,21 @@ const App = () => {
     closeModal()
 
 
+    toast('Product has been Added!', {
+      icon: '✅',
+      style: {
+        borderRadius: '8px',
+        background: '#333',
+        color: '#fff',
+        padding: '12px 16px',
+        fontSize: '16px',
+        fontWeight: '500',
+      },
+      position: 'top-center',
+      duration: 3000,
+    });
   }
+    
   const onSubmitEditHandler = (e: ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
     const errors = productValidation({
@@ -152,8 +172,41 @@ const App = () => {
     setProductEdit(defaultProductObject);
     setTempColor([])
     closeEditModal()
-
+    toast('Product has been Updated!', {
+      icon: '✅',
+      style: {
+        borderRadius: '8px',
+        background: '#333',
+        color: '#fff',
+        padding: '12px 16px',
+        fontSize: '16px',
+        fontWeight: '500',
+      },
+      position: 'top-center',
+      duration: 3000,
+    });
   }
+
+  const removeProductHandler = () => {
+    const Filter = products.filter(product => product.id !== productEdit.id)
+
+    setProducts(Filter)
+    closeConfirmModal()
+    toast('Product has been Deleted!', {
+      icon: '✅',
+      style: {
+        borderRadius: '8px',
+        background: '#333',
+        color: '#fff',
+        padding: '12px 16px',
+        fontSize: '16px',
+        fontWeight: '500',
+      },
+      position: 'top-center',
+      duration: 3000,
+    }); }
+
+ 
 
 
 // Randers
@@ -166,6 +219,7 @@ const renderProductsList = products.map((product, idx) => (
       openEditModal={openEditModal}
       setProductEditidx={setProductEditIdx}
       idx={idx}
+      openConfirmModal={openConfirmModal}
     />
 ));
 
@@ -210,6 +264,7 @@ const renderProductsList = products.map((product, idx) => (
     <label className=' mb-[1px] text-sm  font-medium text-gray-700' htmlFor={input.id}>{input.label}</label>
     <Input type='text' id={input.id} name={input.name} value={product[input.name]} onChange={onChangeHandler} ></Input>
     {errors[input.name] && <ErrorMassage message={errors[input.name]} />}
+
   </div>)
   return (
 
@@ -279,8 +334,27 @@ const renderProductsList = products.map((product, idx) => (
         </form>
 
       </Modal>
+
+{/*  Delete Modal */}
+
+<Modal
+        isOpen={isOpenConfirmModal}
+        closeModal={closeConfirmModal}
+        title="Are you sure you want to remove this Product from your Store?"
+        description="Deleting this product will remove it permanently from your inventory. Any associated data, sales history, and other related information will also be deleted. Please make sure this is the intended action."
+      >
+        <div className="flex items-center space-x-3">
+        <Button Childern={"Yes , remove "} className=" bg-[#c2344d] hover:bg-red-800 cursor-pointer" onClick={removeProductHandler} />
+        <Button Childern={"Cancel"} className="bg-[#f5f5fa] hover:bg-gray-300 !text-black cursor-pointer" onClick={closeConfirmModal} />
+        </div>
+      </Modal>
+
+    <Toaster/>
     </div>
-  )
+  ) 
+
+
 }
 
 export default App
+  

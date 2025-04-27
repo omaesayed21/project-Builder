@@ -9,9 +9,10 @@ interface Iprops{
     openEditModal : () => void
     idx :number
     setProductEditidx : (value : number) => void
+    openConfirmModal :() => void
 }
 
-const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setProductEditidx}: Iprops) => {
+const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setProductEditidx , openConfirmModal} : Iprops) => {
   const renderColorList = product.colors && product.colors.map(colors => <CircleColor key={colors} color={colors}
   />)
   const onEdit =() =>{
@@ -19,6 +20,12 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
     openEditModal()
     setProductEditidx(idx)
   }
+
+  const onRemove = ( ) =>{
+    setProductToEdit(product)
+    openConfirmModal()
+    
+      }
     return (
         <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-2'>
         <Image 
@@ -48,7 +55,7 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
       
         <div className='flex items-center justify-between space-x-2 mt-4'>
           <Button Childern={"Edit"} className="bg-blue-700 w-full  hover:bg-blue-800 cursor-pointer "  onClick={onEdit}/>
-          <Button Childern={"Delete"} className=" bg-red-700 hover:bg-red-800 cursor-pointer w-full  " />
+          <Button Childern={"Remove"} className=" bg-red-700 hover:bg-red-800 cursor-pointer w-full  "  onClick={onRemove}/>
         </div>
       </div>
       
