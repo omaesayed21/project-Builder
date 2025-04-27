@@ -26,8 +26,13 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
     openConfirmModal()
     
       }
+      const formatPrice = (price: number): string => {
+        return `$${price.toLocaleString('en-US')}`;
+      }
+      
     return (
-        <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-2'>
+
+        <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-5  space-x-2'>
         <Image 
           imageUrl={product.imageURL} 
           alt="Productcard" 
@@ -45,7 +50,7 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
         </div>
       
         <div className='flex items-center justify-between mt-auto'>
-          <span className='text-indigo-600 text-xl font-bold'>${product.price}</span>
+        <span className='text-indigo-600 text-xl font-bold'>{formatPrice(Number(product.price))}</span>
           <Image 
             imageUrl={product.category.imageURL} 
             alt="Productcard" 

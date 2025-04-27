@@ -269,8 +269,20 @@ const renderProductsList = products.map((product, idx) => (
   return (
 
     <div className=' container mx-auto'>
-      <Button Childern={"Add New Product"} className=" w-50 block bg-indigo-700 hover:bg-indigo-800 mx-auto my-10 px-10 font-medium" onClick={openModal} />
-      <div className=' grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4  lg:grid-cols-3 gap-4 p-2 rounded-md '>
+    <div className="flex items-center justify-between mx-8 my-6">
+  <h1 className="text-2xl font-semibold text-gray-800">
+    Product Builder
+  </h1>
+
+  <button
+    className="bg-indigo-700 hover:bg-indigo-800 text-white text-sm px-5 py-2 rounded-md font-medium transition-colors cursor-pointer"
+    onClick={openModal}
+  >
+    Add Product
+  </button>
+</div>
+
+        <div className=' grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4  lg:grid-cols-3 gap-4 p-2 rounded-md '>
         {renderProductsList}
       </div>
 
