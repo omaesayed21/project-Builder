@@ -10,7 +10,7 @@ import ErrorMassage from './Componentes/ui/ErorrMassage'
 import CircleColor from './Componentes/ui/CircleColor'
 import { v4 as uuid } from "uuid";
 import Select from './Componentes/ui/Select'
-import ProductName from './Type/Index'
+import ProductName from './Type/index'
 import toast , { Toaster} from 'react-hot-toast'
 import { CheckIcon , XMarkIcon } from '@heroicons/react/20/solid'
 

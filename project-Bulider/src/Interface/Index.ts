@@ -1,4 +1,4 @@
-import ProductName from "../Type/Index.ts"
+import ProductName from "../Type/index"
 
 export interface IProduct {
     id?: string | undefined;
