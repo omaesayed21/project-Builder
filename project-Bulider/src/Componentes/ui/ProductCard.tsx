@@ -3,6 +3,7 @@ import Button from './Button'
 import Image from './Image'
 import { textSlice } from '../Utils/function'
 import CircleColor from './CircleColor'
+import { PencilIcon , TrashIcon } from '@heroicons/react/20/solid'
 interface Iprops{
     product: IProduct
     setProductToEdit : (product  : IProduct) => void
@@ -32,7 +33,7 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
       
     return (
 
-        <div className='rounded-md p-4 flex flex-col mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-5  space-x-2'>
+        <div className='rounded-md p-4 flex flex-col  mx-auto max-w-sm md:max-w-md min-h-[500px] shadow-md bg-white  gap-5  space-x-2'>
         <Image 
           imageUrl={product.imageURL} 
           alt="Productcard" 
@@ -59,12 +60,27 @@ const ProductCard = ( { product  , setProductToEdit , openEditModal , idx , setP
         </div>
       
         <div className='flex items-center justify-between space-x-2 mt-4'>
-          <Button Childern={"Edit"} className="bg-blue-700 w-full  hover:bg-blue-800 cursor-pointer "  onClick={onEdit}/>
-          <Button Childern={"Remove"} className=" bg-red-700 hover:bg-red-800 cursor-pointer w-full  "  onClick={onRemove}/>
+        <Button 
+  className="bg-blue-700 hover:bg-blue-800 text-white font-medium py-2 px-4 cursor-pointer  transition-colors duration-200 inline-flex items-center justify-center gap-2"
+  onClick={onEdit}
+>
+  <PencilIcon className="h-5 w-5" />
+  <span>Edit</span>
+</Button>  
+
+          <Button
+          className=' bg-red-700 hover:bg-red-800 cursor-pointer w-full  py-2 px-4 transition-colors duration-200 inline-flex items-center justify-center gap-2'  
+           onClick={onRemove}
+          >
+
+            <TrashIcon className="h-5 w-5" />
+            <span>Remove</span>
+
+          </Button>
         </div>
       </div>
-      
         )
 
 }
 export default ProductCard
+      

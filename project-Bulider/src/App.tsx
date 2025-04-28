@@ -12,6 +12,7 @@ import { v4 as uuid } from "uuid";
 import Select from './Componentes/ui/Select'
 import ProductName from './Type/Index'
 import toast , { Toaster} from 'react-hot-toast'
+import { CheckIcon , XMarkIcon } from '@heroicons/react/20/solid'
 
 // /**
 //  * The main application component.
@@ -270,15 +271,16 @@ const renderProductsList = products.map((product, idx) => (
 
     <div className=' container mx-auto'>
     <div className="flex items-center justify-between mx-8 my-6">
-  <h1 className="text-2xl font-semibold text-gray-800">
-    Product Builder
-  </h1>
+    <h1 className="text-4xl font-semibold">
+  <span className="text-purple-700">Product</span>{' '}
+  <span className="text-pink-600">Builder</span>
+</h1>
 
   <button
     className="bg-indigo-700 hover:bg-indigo-800 text-white text-sm px-5 py-2 rounded-md font-medium transition-colors cursor-pointer"
     onClick={openModal}
   >
-    Add Product
+    Build A Product
   </button>
 </div>
 
@@ -304,9 +306,17 @@ const renderProductsList = products.map((product, idx) => (
           {/* BUTTONS Modal for ADD product */}
 
           <div className='flex items-center  space-x-3  gap-2 mt-2'>
-            <Button Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer" />
-            <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  cursor-pointer " onClick={onCancelHandler} />
-          </div>
+          <Button
+            className=' bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer  flex items-center justify-center' >
+              <CheckIcon className=' w-6 h-6' />
+              <span> Submit</span>
+            </Button>
+            <Button className=' bg-gray-200 hover:bg-gray-400 w-full  cursor-pointer flex items-center justify-center'  onClick={onCancelHandler}>
+
+<XMarkIcon className=' w-6 h-6' />
+<span> Cancel</span>
+
+</Button>          </div>
         </form>
 
       </Modal>
@@ -340,8 +350,18 @@ const renderProductsList = products.map((product, idx) => (
 
 {/* Buttos Modal for Edit */}
           <div className='flex items-center  space-x-3  gap-2 mt-2'>
-            <Button Childern={"Submit"} className=" bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer" />
-            <Button Childern={"Cancel"} className=" bg-gray-400 hover:bg-gray-600 w-full  cursor-pointer " onClick={onCancelHandler} />
+
+            <Button
+            className=' bg-indigo-700 hover:bg-indigo-800 w-full mb-1  cursor-pointer  flex items-center justify-center' >
+              <CheckIcon className=' w-6 h-6' />
+              <span> Submit</span>
+            </Button>
+            <Button className='  bg-gray-200 hover:bg-gray-400 w-full  cursor-pointer flex items-center justify-center'  onClick={onCancelHandler}>
+
+              <XMarkIcon className=' w-6 h-6' />
+              <span> Cancel</span>
+
+            </Button>
           </div>
         </form>
 
@@ -356,8 +376,9 @@ const renderProductsList = products.map((product, idx) => (
         description="Deleting this product will remove it permanently from your inventory. Any associated data, sales history, and other related information will also be deleted. Please make sure this is the intended action."
       >
         <div className="flex items-center space-x-3">
-        <Button Childern={"Yes , remove "} className=" bg-[#c2344d] hover:bg-red-800 cursor-pointer" onClick={removeProductHandler} />
-        <Button Childern={"Cancel"} className="bg-[#f5f5fa] hover:bg-gray-300 !text-black cursor-pointer" onClick={closeConfirmModal} />
+        <Button children={"Yes , remove "} className=" bg-[#c2344d] hover:bg-red-800 cursor-pointer" onClick={removeProductHandler} />
+       
+        <Button children={"Cancel"} className="bg-[#f5f5fa] hover:bg-gray-300 !text-black cursor-pointer" onClick={closeConfirmModal} />
         </div>
       </Modal>
 
